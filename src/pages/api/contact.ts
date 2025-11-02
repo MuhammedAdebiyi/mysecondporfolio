@@ -1,58 +1,49 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import nodemailer, { SentMessageInfo } from "nodemailer";
+import nodemailer from "nodemailer";
 
-type ContactRequestBody = {
-  name: string;
-  email: string;
-  message: string;
-};
-
-type ContactResponse = {
-  message: string;
-  info?: SentMessageInfo;
-};
+type Data = { message: string };
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<ContactResponse>
+  res: NextApiResponse<Data>
 ) {
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method not allowed" });
   }
 
-  const body = req.body as ContactRequestBody;
+  // Type the request body
+  const body = req.body as { name: string; email: string; message: string };
+  const { name, email, message } = body;
 
-  
-  const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, EMAIL_TO } = process.env;
-  if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASS || !EMAIL_TO) {
-    return res.status(500).json({ message: "SMTP environment variables not configured" });
+  if (!name || !email || !message) {
+    return res.status(400).json({ message: "Missing required fields" });
   }
 
-  const transporter = nodemailer.createTransport({
-    host: SMTP_HOST,
-    port: Number(SMTP_PORT),
-    secure: Number(SMTP_PORT) === 465,
-    auth: {
-      user: SMTP_USER,
-      pass: SMTP_PASS,
-    },
-  });
-
   try {
-    const info: SentMessageInfo = await transporter.sendMail({
-      from: `"${body.name}" <${body.email}>`,
-      to: EMAIL_TO,
-      subject: `New message from ${body.name}`,
-      text: body.message,
+    const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST,
+  port: Number(process.env.SMTP_PORT) || 465,
+  secure: true,
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+    },
+});
+
+
+    await transporter.sendMail({
+      from: `"${name}" <${email}>`,
+      to: process.env.EMAIL_USER,
+      subject: `New Contact Form Message from ${name}`,
+      text: message,
+      html: `<p><strong>Name:</strong> ${name}</p>
+             <p><strong>Email:</strong> ${email}</p>
+             <p><strong>Message:</strong> ${message}</p>`,
     });
 
-    return res.status(200).json({ message: "Email sent successfully!", info });
-  } catch (error: unknown) {
-    if (error instanceof Error) {
-      console.error("Nodemailer error:", error.message);
-    } else {
-      console.error(error);
-    }
-    return res.status(500).json({ message: "Failed to send email." });
+    return res.status(200).json({ message: "Message sent successfully" });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: "Failed to send message" });
   }
 }
