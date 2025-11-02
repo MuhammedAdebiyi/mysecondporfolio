@@ -38,7 +38,7 @@ const projects = [
     title: "The Pacific Psyché",
     description:
       "A mental health platform connecting users with licensed therapists through virtual sessions — built using Django and React Native.",
-    image: "/projects/pacificpsyche.jpg", // add your own image or placeholder
+    image: "/projects/pacificpsyche.jpg", 
     href: "https://pacificpsyche.com",
   },
   {

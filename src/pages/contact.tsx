@@ -45,50 +45,50 @@ export default function Contact() {
           Have a question or want to work together? Fill out the form below and I’ll get back to you.
         </p>
 
-        <form
-          onSubmit={handleSubmit}
-          className="flex flex-col gap-6 bg-background/50 backdrop-blur-md rounded-lg p-8 shadow-lg"
+       <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-6 bg-background/50 backdrop-blur-md rounded-lg p-8 shadow-lg"
         >
-          <div className="flex flex-col sm:flex-row gap-4">
+        <div className="flex flex-col sm:flex-row gap-4">
             <input
-              type="text"
-              name="name"
-              placeholder="Your Name"
-              value={form.name}
-              onChange={handleChange}
-              required
-              className="flex-1 border border-input rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary transition"
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            value={form.name}
+            onChange={handleChange}
+            required
+            className="flex-1 border border-input rounded-md px-4 py-3 text-foreground placeholder:text-muted-foreground bg-background focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition"
             />
             <input
-              type="email"
-              name="email"
-              placeholder="Your Email"
-              value={form.email}
-              onChange={handleChange}
-              required
-              className="flex-1 border border-input rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary transition"
+            type="email"
+            name="email"
+            placeholder="Your Email"
+            value={form.email}
+            onChange={handleChange}
+            required
+            className="flex-1 border border-input rounded-md px-4 py-3 text-foreground placeholder:text-muted-foreground bg-background focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition"
             />
-          </div>
+        </div>
 
-          <textarea
+        <textarea
             name="message"
             placeholder="Your Message"
             value={form.message}
             onChange={handleChange}
             required
-            className="border border-input rounded-md px-4 py-3 h-40 focus:outline-none focus:ring-2 focus:ring-primary transition"
-          />
+            className="border border-input rounded-md px-4 py-3 h-40 text-foreground placeholder:text-muted-foreground bg-background focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition"
+        />
 
-          <button
+        <button
             type="submit"
             className="bg-primary text-primary-foreground rounded-lg px-6 py-3 font-medium text-lg hover:bg-primary/80 transition"
-          >
+        >
             Send Message
-          </button>
+        </button>
 
-          {status && (
+        {status && (
             <p className="mt-2 text-sm text-muted-foreground">{status}</p>
-          )}
+        )}
         </form>
 
         <div className="mt-16 flex flex-col sm:flex-row justify-between gap-8 text-muted-foreground">
