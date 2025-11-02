@@ -45,14 +45,14 @@ const projects = [
     title: "Isnad Invoice System",
     description:
       "A full-featured invoice management platform for a logistics company, featuring PDF generation, filtering, and secure authentication.",
-    image: "/projects/isnadinvoice.png", // add your own image
+    image: "/projects/isnadinvoice.png",
     href: "https://isnadinvoice.com",
   },
   {
     title: "DevByAdebiyi Portfolio",
     description:
       "My personal portfolio website showcasing software projects and engineering skills — built with Next.js and Tailwind CSS.",
-    image: "/projects/devbyadebiyi.jpg", // add your own image
+    image: "/projects/devbyadebiyi.jpg",
     href: "https://devbyadebiyi.com",
   },
 ];
@@ -215,7 +215,7 @@ export default function Home() {
               data-scroll-speed=".06"
               className="flex flex-row items-center space-x-1.5 pt-6"
             >
-              <Link href="#contact" passHref>
+              <Link href="contact" passHref>
                 <Button>
                   Get in touch <ChevronRight className="ml-1 h-4 w-4" />
                 </Button>
@@ -449,7 +449,7 @@ export default function Home() {
               I&apos;m currently available for freelance work and open to
               discussing new projects.
             </p>
-            <Link href="mailto:wendoj@proton.me" passHref>
+            <Link href="/contact" passHref>
               <Button className="mt-6">Get in touch</Button>
             </Link>
           </div>
