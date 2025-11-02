@@ -1,13 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import nodemailer, { SentMessageInfo } from "nodemailer";
 
-
 type ContactRequestBody = {
   name: string;
   email: string;
   message: string;
 };
-
 
 type ContactResponse = {
   message: string;
@@ -22,10 +20,8 @@ export default async function handler(
     return res.status(405).json({ message: "Method not allowed" });
   }
 
-  
-  const body: ContactRequestBody = req.body;
+  const body = req.body as ContactRequestBody;
 
-  
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
     port: Number(process.env.SMTP_PORT) || 587,
@@ -36,7 +32,6 @@ export default async function handler(
   });
 
   try {
-    
     const info: SentMessageInfo = await transporter.sendMail({
       from: `"${body.name}" <${body.email}>`,
       to: process.env.EMAIL_TO,
