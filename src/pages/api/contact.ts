@@ -7,11 +7,16 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
+  
+  console.log("SMTP_HOST:", process.env.SMTP_HOST);
+  console.log("SMTP_PORT:", process.env.SMTP_PORT);
+  console.log("EMAIL_USER:", process.env.EMAIL_USER);
+  console.log("EMAIL_PASS:", process.env.EMAIL_PASS ? "****" : "MISSING");
+
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method not allowed" });
   }
 
-  // Type the request body
   const body = req.body as { name: string; email: string; message: string };
   const { name, email, message } = body;
 
@@ -21,15 +26,14 @@ export default async function handler(
 
   try {
     const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: Number(process.env.SMTP_PORT) || 465,
-  secure: true,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-    },
-});
-
+      host: process.env.SMTP_HOST,
+      port: Number(process.env.SMTP_PORT) || 465,
+      secure: true,
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
 
     await transporter.sendMail({
       from: `"${name}" <${email}>`,
