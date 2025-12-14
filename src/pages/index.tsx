@@ -39,7 +39,7 @@ const projects = [
     description:
       "A mental health platform connecting users with licensed therapists through virtual sessions — built using Django and React Native.",
     image: "/projects/pacificpsyche.jpg", 
-    href: "https://pacificpsyche.com",
+    href: "https://pacific-psyche-pkx5.vercel.app/",
   },
   {
     title: "Isnad Invoice System",
@@ -48,13 +48,13 @@ const projects = [
     image: "/projects/isnadinvoice.png",
     href: "https://isnadinvoice.com",
   },
-  {
-    title: "DevByAdebiyi Portfolio",
-    description:
-      "My personal portfolio website showcasing software projects and engineering skills — built with Next.js and Tailwind CSS.",
-    image: "/projects/devbyadebiyi.jpg",
-    href: "https://devbyadebiyi.com",
-  },
+  // {
+  //   title: "DevByAdebiyi Portfolio",
+  //   description:
+  //     "My personal portfolio website showcasing software projects and engineering skills — built with Next.js and Tailwind CSS.",
+  //   image: "/projects/devbyadebiyi.jpg",
+  //   href: "https://devbyadebiyi.com",
+  // },
 ];
 
 const services = [
